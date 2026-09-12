@@ -1,0 +1,16 @@
+{
+  "name": "task-cli",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "vitest": "^5.0.0"
+  }
+}
