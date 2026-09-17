@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import taskService from "../services/task.service.js";
 
-export async function getAllTasks(req:Request,res:Response) {
+export async function getAllTasks(req: Request, res: Response) {
     try {
         const tasks = await taskService.getAllTasks();
         if (tasks.length === 0) {
@@ -14,6 +14,7 @@ export async function getAllTasks(req:Request,res:Response) {
             tasks
         });
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             message: 'Something went wrong'
         });
@@ -56,6 +57,7 @@ export async function createTask(
             id: task.id
         });
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             message: 'Something went wrong'
         });

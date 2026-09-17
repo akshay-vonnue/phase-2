@@ -35,6 +35,7 @@ class TaskService{
     ): Promise<Boolean | undefined> {
 
         const task = await taskRepository.findById(id);
+        console.log(task)
 
         if (!task) {
             return undefined;
