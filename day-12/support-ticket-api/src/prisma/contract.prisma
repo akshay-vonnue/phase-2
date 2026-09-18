@@ -1,0 +1,79 @@
+// use prisma-8
+
+// model User {
+//   id        Int      @id @default(autoincrement())
+//   email     String   @unique
+//   username  String?
+//   name      String?
+//   posts     Post[]
+//   createdAt TimestamptzString @default(now())
+//   updatedAt temporal.updatedAtString()
+// }
+
+// model Post {
+//   id        Int      @id @default(autoincrement())
+//   title     String
+//   content   String?
+//   author    User     @relation(fields: [authorId], references: [id])
+//   authorId  Int
+//   createdAt TimestamptzString @default(now())
+//   updatedAt temporal.updatedAtString()
+// }
+
+model Customer {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+}
+
+model Agent{
+  id      Int       @id @default(autoincrement())
+  name    String
+  email   String    @unique
+}
+
+model Category{
+  id      Int       @id @default(autoincrement())
+  name    String
+}
+
+enum Priority{
+  LOW
+  HIGH
+}
+
+model Ticket {
+  id        Int     @id @default(autoincrement())
+  title     String
+  description String
+  customer  Customer @relation(fields:[customer_id],references:[id])
+  customer_id Int
+  category Category @relation(fields:[category_id],references:[id])
+  category_id   Int
+  createdAt   TimestamptzString @default(now())
+  priority Priority
+}
+
+model Status{
+  id      Int       @id @default(autoincrement())
+  ticket  Ticket    @relation(fields:[ticket_id],references:[id],onDelete: Cascade)
+  ticket_id  Int
+  status    String
+}
+
+model Assignment{
+  id      Int       @id @default(autoincrement())
+  ticket  Ticket    @relation(fields:[ticket_id],references:[id])
+  ticket_id  Int
+  user    Agent      @relation(fields:[user_id],references:[id])
+  user_id    Int
+}
+
+model Comment{
+  id      Int       @id @default(autoincrement())
+  ticket  Ticket     @relation(fields:[ticket_id],references:[id])
+  ticket_id   Int
+  comment     String
+  user       Agent     @relation(fields:[user_id],references:[id])
+  user_id     Int
+}

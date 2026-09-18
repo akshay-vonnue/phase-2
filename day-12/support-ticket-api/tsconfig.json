@@ -1,0 +1,19 @@
+{
+    "compilerOptions":{
+        "strict": true,
+        "module": "preserve",
+        "target": "es2022",
+        "rootDir": "src",
+        "outDir":"dist",
+        "types": [
+            "node",
+            "express"
+        ],
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "skipLibCheck": true
+    },
+    "include":[
+        "src/**/*"
+    ],
+}

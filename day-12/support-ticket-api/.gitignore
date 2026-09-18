@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+
+migrations/snapshots/
+src/prisma/contract.json
+src/prisma/contract.d.ts
+data/data.json
