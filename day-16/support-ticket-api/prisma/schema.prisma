@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Customer {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  tickets  Ticket[]
+  role     String
+}
+
+model Agent {
+  id          Int          @id @default(autoincrement())
+  name        String
+  email       String       @unique
+  password    String
+  assignments Assignment[]
+  comments    Comment[]
+  role        String
+}
+
+// model User{
+//   id       String           @id @default(cuid())
+//   name     String
+//   email    String           @unique
+//   password String
+// }
+
+model Category {
+  id      Int      @id @default(autoincrement())
+  name    String
+  tickets Ticket[]
+}
+
+model Ticket {
+  id          Int          @id @default(autoincrement())
+  title       String
+  description String
+  customer_id Int
+  category_id Int
+  status      String
+  createdAt   DateTime     @default(now())
+  priority    Priority
+  assignments Assignment[]
+  comments    Comment[]
+  category    Category     @relation(fields: [category_id], references: [id])
+  customer    Customer     @relation(fields: [customer_id], references: [id])
+  statusHistories Status_history[]
+}
+
+model Status_history{
+  id          Int          @id @default(autoincrement())
+  ticket      Ticket       @relation(fields: [ticket_id],references: [id])
+  ticket_id   Int
+  from        String
+  to          String  
+  changedAt   DateTime     @default(now())      
+}
+
+model Assignment {
+  id        Int    @id @default(autoincrement())
+  ticket_id Int
+  user_id   Int
+  ticket    Ticket @relation(fields: [ticket_id], references: [id])
+  user      Agent  @relation(fields: [user_id], references: [id])
+}
+
+model Comment {
+  id        Int    @id @default(autoincrement())
+  ticket_id Int
+  comment   String
+  user_id   Int
+  ticket    Ticket @relation(fields: [ticket_id], references: [id])
+  user      Agent  @relation(fields: [user_id], references: [id])
+}
+
+enum Priority {
+  LOW
+  HIGH
+}

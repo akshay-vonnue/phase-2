@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config()
 console.log(process.env.JWT_SECRET)
 
-export const signToken = async (payload: { userName: String, role: 'ADMIN' | 'AGENT' | 'USER' }) => {
+export const signToken = async (payload: { userName: String, email: string, role: 'ADMIN' | 'AGENT' | 'USER' }) => {
     return jwt.sign(payload, process.env.JWT_SECRET as jwt.Secret, {
         expiresIn: process.env.JWT_EXPIRES_IN as unknown as NonNullable<
             jwt.SignOptions['expiresIn']
@@ -17,6 +17,7 @@ export const verifyToken = async (token: string) => {
 
     return {
         userName: decoded.userName,
-        role: decoded.role
+        role: decoded.role,
+        email:decoded.email
     }
 }
