@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import userService from "../services/user.service.js";
 import { signToken } from "../lib/jwt.js";
+import { UserNotFoundError } from "../lib/utils.js";
 
 export const signup = async (req: Request, res: Response) => {
     const { name, email, role, password } = req.body;
@@ -13,6 +14,12 @@ export const signup = async (req: Request, res: Response) => {
     }
 
     const result = await userService.signup(name, email, password, role);
+    if (result instanceof Error) {
+        return res.status(400).json({
+            success: false,
+            message:"email already in use."
+        })
+    }
     if (result) {
         const token = await signToken({id:result.id, userName: name, role, email });
         res.status(201).json({
@@ -33,6 +40,13 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const result = await userService.login(email, password, role)
+
+    if (result instanceof Error) {
+        return res.status(400).json({
+            success: false,
+            message:result.message
+        })
+    }
     
     res.status(200).json({
         data:result

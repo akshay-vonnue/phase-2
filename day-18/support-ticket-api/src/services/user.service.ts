@@ -2,6 +2,7 @@ import { signToken, verifyToken } from "../lib/jwt";
 import { prisma } from "../lib/prisma.js";
 import bcrypt from 'bcrypt';
 import { User } from "../lib/types";
+import { UserNotFoundError } from "../lib/utils";
 
 class UserService {
     async signup(
@@ -35,7 +36,7 @@ class UserService {
                 return safeUser
 
             } else {
-                throw new Error(`Email already in use.`)
+                return new Error(`Email already in use.`)
             }
         } else if (role == 'USER') {
             console.log(existingUser)
@@ -58,7 +59,7 @@ class UserService {
                 return safeUser
 
             } else {
-                throw new Error(`Email already in use.`)
+                return new Error(`Email already in use.`)
             }
         }
         console.log("hello")
@@ -70,7 +71,7 @@ class UserService {
         password: string,
         role: string
     ) {
-
+        console.log('inside service login')
         if (role == 'AGENT' || role == 'ADMIN') {
             console.log("agent")
             const existingUser = await prisma.agent.findUnique({
@@ -80,13 +81,15 @@ class UserService {
             })
 
             if (!existingUser) {
-                throw new Error(`User not found`)
+                return new UserNotFoundError()
             }
 
-            const isValidUser = bcrypt.compare(password, existingUser.password);
+            const isValidUser = await bcrypt.compare(password, existingUser.password);
+            console.log(`is valid user`,isValidUser)
 
             if (!isValidUser) {
-                throw new Error('invalid password')
+                console.log("invalid password")
+                return new Error('invalid password')
             }
 
             return signToken({
@@ -105,13 +108,14 @@ class UserService {
             })
 
             if (!existingUser) {
-                throw new Error('User not found')
+                return new UserNotFoundError()
             }
 
-            const isValidUser = bcrypt.compare(password, existingUser.password);
+            const isValidUser = await bcrypt.compare(password, existingUser.password);
+            console.log(`is valid user`,isValidUser)
 
             if (!isValidUser) {
-                throw new Error('invalid password')
+                return new Error('invalid password')
             }
 
             return signToken({

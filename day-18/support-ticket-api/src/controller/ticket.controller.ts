@@ -31,7 +31,7 @@ export const createTicket = async (req: Request, res: Response) => {
 
     console.log(`repo:`, user.id);
 
-    if (!title || !description || !priority || !createdBy || !category_id) {
+    if (!title || !description || !priority || !category_id) {
       return res.status(422).json({
         success: false,
         message: "All fields are required.",
@@ -179,6 +179,13 @@ export const updateStatus = async (req: Request, res: Response) => {
 
     let ticketId = reqParams["id"] as string;
     let status = reqParams["status"] as Status;
+
+    if (!['open', 'resolved', 'closed', 'OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED'].includes(status)) {
+      return res.status(400).json({
+        success: false,
+        messsage:'invalid status format'
+      })
+    }
 
     const token = req.headers["authorization"]?.split(" ")[1];
     const user = await verifyToken(token as string);
