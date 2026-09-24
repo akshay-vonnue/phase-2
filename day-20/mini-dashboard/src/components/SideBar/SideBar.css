@@ -1,0 +1,21 @@
+/* side-bar */
+
+.sidebar-div{
+    padding: 1rem;
+    background-color: rgb(13, 55, 133);
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-elements{
+    background-color: rgb(39, 39, 39);
+    border-radius: 0.4rem;
+}
+
+.sidebar-elements-selected{
+    background-color: rgb(1, 86, 197);
+    border-radius: 0.4rem;
+}

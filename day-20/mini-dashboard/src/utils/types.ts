@@ -1,0 +1,1 @@
+export type Page = 'Dashboard' | 'Projects' | 'Issues';
