@@ -1,0 +1,59 @@
+.main-content-div{
+    background-color: rgba(29, 28, 28, 0.726);
+    color: white;
+    padding: 2rem;
+    grid-column: span 2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+    padding-bottom: 0px;
+    align-content: start;
+
+    min-height: 100vh;
+    overflow: scroll;
+    overflow-x: hidden;
+
+    scrollbar-width: none;
+}
+
+.no-items{
+    margin-top: 40vh;
+    grid-column: span 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-issues-found{
+    grid-template-columns: span 2;
+}
+
+.error-controllers-section{
+    grid-column: span 3;
+    
+    display: flex;
+    justify-content: space-around;
+    gap: 8px;
+}
+
+.error-controllers-section input{
+    flex: 1;
+}   
+
+.modal{
+    display: none;
+}
+
+@media (width <= 720px) {
+    .main-content-div{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (width <= 480px) {
+    .main-content-div{
+        grid-template-columns: 1fr;
+    }
+}
