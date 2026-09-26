@@ -1,0 +1,25 @@
+/* header */
+
+.header-div{
+    grid-column: span 3;
+    border: 1px solid black;
+    padding: 0.5rem;
+    background-color: rgb(7, 37, 94);
+    padding-inline-end: 10px;
+    padding-inline-start: 20px;
+    padding-top: 10px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    padding-top: 10px;
+}
+
+.avatar{
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover; 
+}
