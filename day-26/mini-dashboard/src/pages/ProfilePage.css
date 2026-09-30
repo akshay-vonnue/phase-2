@@ -1,0 +1,21 @@
+.profile-card{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0rem;
+}
+
+.user-avatar img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.user-name{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.logout-button{
+    margin-top: 1rem;
+    padding: 8px 18px;
+}

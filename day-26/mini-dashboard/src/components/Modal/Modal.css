@@ -1,0 +1,74 @@
+.input-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    
+    gap: 10px;
+}
+
+.modal-div{
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
+.close-button{
+    position:absolute;
+    left: 80%;
+    display: flex;
+
+    background-color: grey;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-div form{
+    margin-top: 6rem;
+}
+
+.modal-div label{
+    font-size: 1.5rem;
+}
+
+.modal-div input{
+    padding: 0.5rem 0.1rem;
+}
+
+.modal-div select{
+    flex: 1;
+    margin-left: 57px;
+
+    padding: 0.5rem 0.1rem;
+}
+
+.modal-div button{
+    margin-top: 20px;
+    padding: 10px 30px;
+}
+
+.error-wrapper{
+    font-size:12px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: red;
+}
+
+.create-issue-buttons{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.create-issue-buttons button{
+    flex: 1;
+}
+
+.submit-button{
+    background-color: rgb(7, 37, 94);
+    border: 0.5px solid rgb(49, 48, 48);
+}

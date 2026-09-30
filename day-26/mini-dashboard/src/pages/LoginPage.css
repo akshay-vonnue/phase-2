@@ -1,0 +1,21 @@
+.login-fields{
+    display: flex;
+    flex-direction: column;
+    grid-auto-flow: 1rem;
+    font-size: 20px;
+    gap: 1rem;
+}
+
+.login-fields button{
+    padding: 8px;
+}
+
+.login-field-wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.login-field-wrapper input{
+    padding: 8px 20px;
+}

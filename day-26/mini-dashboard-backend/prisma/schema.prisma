@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ErrorStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum IssuePriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+// model User {
+//   id       String    @id @default(cuid())
+//   name     String
+//   avatar   String
+//   issues   Issue[]
+//   projects Project[]
+// }
+
+// model Project {
+//   id          String   @id @default(cuid())
+//   name        String
+//   description String
+//   createdById String
+//   createdAt   DateTime @default(now())
+//   issues      Issue[]
+//   createdBy   User     @relation(fields: [createdById], references: [id])
+// }
+
+// model Issue {
+//   id          String        @id @default(uuid())
+//   title       String
+//   description String
+//   status      ErrorStatus
+//   priority    IssuePriority
+//   overdue     Int
+//   projectId   String
+//   project     Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+//   resolverId  String
+//   resolver    User          @relation(fields: [resolverId], references: [id])
+// }
+
+model Issue {
+  id           String        @id @default(cuid())
+  title        String
+  description  String
+  status       ErrorStatus
+  priority     IssuePriority
+  overdue      BigInt
+  // projectId    String
+  // project      Project       @relation(fields: [projectId], references: [id])
+  resolverId   String
+  resolverName String
+}
+
+model Project {
+  id          String @id @default(cuid())
+  title       String
+  description String
+  // issues      Issue[]
+}
+
+model User {
+  id           String @id @default(cuid())
+  name         String
+  email        String @unique
+  passwordHash String
+  avatar       String
+}

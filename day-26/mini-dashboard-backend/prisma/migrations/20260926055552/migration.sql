@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Issue" ALTER COLUMN "overdue" SET DATA TYPE BIGINT;
